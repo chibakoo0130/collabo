@@ -1,0 +1,13 @@
+<h2> タイトル</h2>
+<p> <%= @article.title %> </p>
+<h2> 本文</h2>
+<p> <%= @article.body %></p>
+<h2> 天気</h2>
+<p> <%= @article.weather %></p>
+<h2> 画像</h2>
+<%= attachment_image_tag @article, :image, :fill, 100, 100, format: 'jpeg' %>
+
+<%= link_to "編集", edit_article_path(@article.id) %>
+<%= link_to "削除", destroy_article_path(@article.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<%=link_to '新規投稿', articles_new_path %>
+<button type="button" onclick="history.back()"> 戻る</button>

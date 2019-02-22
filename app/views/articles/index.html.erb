@@ -1,0 +1,82 @@
+<h1> 投稿リスト</h1>
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="top"> ChibaDiary</a></li>
+  <li role="presentation" ><a href="#"> メニューA</a></li>
+  <li role="presentation" ><a href="#"> メニューB</a></li>
+</ul>
+
+<div class="container-fulid">
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-4"><h1> 新規投稿</h1>
+      <%= form_for(@article) do |f| %>
+        <h4> タイトル</h4>
+        <%= f.text_field :title %>
+
+        <h4> 本文</h4>
+        <%= f.text_area :body %>
+
+        <h4> 今日の天気</h4>
+        <%= f.text_field :weather %>
+
+        <h4> 画像</h4>
+        <%= f.attachment_field :image %>
+
+        <%= f.submit '投稿' %>
+
+       <% end %>
+     </div>
+
+    <div class="col-md-7">
+      <table border="2", cellpadding="5", cellspacing="20">
+      <tr>
+      <th> タイトル</th>
+      <th> 本文</th>
+      <th> 天気</th>
+      <th> 画像</th>
+      <th> 投稿時間</th>
+      </tr>
+      <% @articles.each do |article| %>
+      <tr>
+      <td>
+        <span>
+          <%=link_to article.title, article_path(article.id)%>
+        </span>
+      </td>
+      <td>
+        <span>
+          <%= article.body %>
+        </span>
+      </td>
+      <td>
+        <span>
+          <%= article.weather %>
+        </span>
+      </td>
+      <td>
+        <span>
+          <%= attachment_image_tag(article, :image, :fill, 300, 300, fallback: "tv_screen_black.png") %>
+        </span>
+      </td>
+      <td>
+        <span>
+          <%= Time.new %>
+        </span>
+      </td>
+      </tr>
+    <% end %>
+    </table>
+    <p>
+      <span>
+        <%=link_to '新規投稿', articles_new_path %>
+      </span>
+    </p>
+
+  </div>
+
+<button type="button" onclick="history.back()"> 戻る</button>
+
+
+
